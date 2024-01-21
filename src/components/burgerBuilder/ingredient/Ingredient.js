@@ -24,7 +24,7 @@ const Ingredient = (props) => {
     case "meat":
       ingredient = (
         <div>
-          <img src="assets/images/meat.png" alt="Bread Top" />
+          <img src="assets/images/meat.png" alt="Meat" />
         </div>
       );
       break;
@@ -32,7 +32,7 @@ const Ingredient = (props) => {
     case "salad":
       ingredient = (
         <div>
-          <img src="assets/images/salad.png" alt="Bread Top" />
+          <img src="assets/images/salad.png" alt="Salad" />
         </div>
       );
       break;
@@ -40,7 +40,7 @@ const Ingredient = (props) => {
     case "cheese":
       ingredient = (
         <div>
-          <img src="assets/images/cheese.png" alt="Bread Top" />
+          <img src="assets/images/cheese.png" alt="Cheese" />
         </div>
       );
       break;

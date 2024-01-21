@@ -3,15 +3,21 @@ import Ingredient from "../ingredient/Ingredient";
 import "./ Burger.css";
 
 const Burger = (props) => {
-  let ingredientArray = props.ingredients.map((item) => {
-    let amountArray = [...Array(item.amount).keys()]; //Creating array here
-    return amountArray.map((_) => {
-      return <Ingredient type={item.type} key={Math.random} />;
+  let ingredientArray = props.ingredients
+    .map((item) => {
+      let amountArray = [...Array(item.amount).keys()]; //Creating array here
+      return amountArray.map((_) => {
+        return <Ingredient type={item.type} key={Math.random} />;
+      });
     })
-  })
-  .reduce((arr, element) =>{
-    return arr.concat(element);
-  }, []);
+    .reduce((arr, element) => {
+      return arr.concat(element);
+    }, []);
+
+  if (ingredientArray.length === 0) {
+    ingredientArray = <p>Please Add Some Ingrediants</p>;
+  }
+
   return (
     <div className="Burger">
       <Ingredient type="bread-top" />
