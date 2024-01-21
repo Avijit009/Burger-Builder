@@ -5,8 +5,8 @@ import Header from './header/Header'
 const MainComponent = () => {
   return (
     <div>
-        <BurgerBuilder/>
         <Header/>
+        <BurgerBuilder/>
     </div>
   )
 }
