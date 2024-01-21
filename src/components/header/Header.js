@@ -19,7 +19,7 @@ const Header = () => {
         </NavbarBrand>
         <Nav className="mr-md-5">
           <NavItem>
-            <NavLink href="#" className="NavLink">hh</NavLink>
+            <NavLink href="#" className="NavLink">Something</NavLink>
           </NavItem>
         </Nav>
       </Navbar>
