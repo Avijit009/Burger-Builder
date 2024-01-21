@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card, CardHeader, CardBody, CardFooter } from "reactstrap";
+import { Card, CardHeader, CardBody, CardFooter, Button } from "reactstrap";
 
 const controls = [
   { label: "Salad", type: "salad" },
@@ -70,7 +70,8 @@ const Controls = (props) => {
         </CardBody>
         <CardFooter>
           <h5>Price: <strong>{props.price}</strong>  BDT</h5>
-        </CardFooter>
+        </CardFooter>,
+        <Button onClick={props.toggleModal} > Order Now </Button>
       </Card>
     </div>
   );

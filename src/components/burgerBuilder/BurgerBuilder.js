@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+
 import Burger from "./Burger/Burger";
 import Controls from "./controls/Controls";
 
@@ -6,7 +8,7 @@ const INGREDIENT_PRICES = {
   salad: 20,
   cheese: 40,
   meat: 80,
-}
+};
 
 export class BurgerBuilder extends Component {
   state = {
@@ -15,7 +17,8 @@ export class BurgerBuilder extends Component {
       { type: "cheese", amount: 0 },
       { type: "meat", amount: 0 },
     ],
-    totalPrice: 80
+    totalPrice: 80,
+    modalOpen: false,
   };
 
   addIngredientHandle = (type) => {
@@ -47,15 +50,36 @@ export class BurgerBuilder extends Component {
     });
   };
 
+  toggleModal = () => {
+    this.setState({
+      modalOpen: !this.state.modalOpen,
+    });
+  };
+
   render() {
     return (
-      <div className="d-flex flex-md-row flex-column">
-        <Burger ingredients={this.state.ingredients} />
-        <Controls
-          addedIngredient={this.addIngredientHandle}
-          removeIngredient={this.removeIngredientHandle}
-          price = {this.state.totalPrice}
-        />
+      <div>
+        <div className="d-flex flex-md-row flex-column">
+          <Burger ingredients={this.state.ingredients} />
+          <Controls
+            addedIngredient={this.addIngredientHandle}
+            removeIngredient={this.removeIngredientHandle}
+            price={this.state.totalPrice}
+            toggleModal = {this.toggleModal}
+          />
+        </div>
+        <Modal isOpen={this.state.modalOpen}>
+          <ModalHeader> Your Order Summary </ModalHeader>
+          <ModalBody>
+            <h5> Total Price: {this.state.totalPrice.toFixed(0)} BDT</h5>{" "}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="success" onClick={this.toggleModal}> Continue to Checkout </Button>
+            <Button color="secondary" onClick={this.toggleModal}>
+              Cancle
+            </Button>
+          </ModalFooter>
+        </Modal>
       </div>
     );
   }
