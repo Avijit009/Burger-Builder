@@ -1,6 +1,7 @@
 import React from "react";
 import "./Header.css";
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
+import { NavLink } from "react-router-dom";
 
 // import Logo from '../../assets/logo.png';
 
@@ -19,24 +20,21 @@ const Header = () => {
           {/* Using logo from src/assets [Need to import this logo before using] */}
           {/* <img src={Logo} alt="Logo" width={80}/> */}
         </NavbarBrand>
+
         <Nav className="mr-md-5">
+
           <NavItem>
-            <NavLink
-            className="NavLink"
-              href="#"
-              style={{
-                textDecoration: "none",
-                color: "white",
-                fontSize: "25px",
-                marginTop: "-25px",
-                "&:hover": {
-                  color: 'wheat'
-                }
-              }}
-            >
-              Something
+            <NavLink className="NavLink" exact to="/">
+              Burger Builder
             </NavLink>
           </NavItem>
+
+          <NavItem>
+            <NavLink className="NavLink" to="/orders">
+              Orders
+            </NavLink>
+          </NavItem>
+
         </Nav>
       </Navbar>
     </div>

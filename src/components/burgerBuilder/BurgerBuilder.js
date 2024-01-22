@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import { Navigate } from "react-router-dom";
 
 import Burger from "./Burger/Burger";
 import Controls from "./controls/Controls";
@@ -21,6 +22,7 @@ export class BurgerBuilder extends Component {
     totalPrice: 80,
     modalOpen: false,
     purchaseAble: false,
+    onClickCheckout: false,
   };
 
   addIngredientHandle = (type) => {
@@ -32,7 +34,7 @@ export class BurgerBuilder extends Component {
       }
     }
     this.setState({
-      ingredients: ingredients, 
+      ingredients: ingredients,
       totalPrice: newPrice,
     });
     this.updatePurchaseAble(ingredients);
@@ -59,12 +61,19 @@ export class BurgerBuilder extends Component {
       modalOpen: !this.state.modalOpen,
     });
   };
+
   updatePurchaseAble = (ingredients) => {
     const sum = ingredients.reduce((sum, element) => {
       return sum + element.amount;
     }, 0);
     this.setState({
       purchaseAble: sum > 0,
+    });
+  };
+
+  handleCheckout = () => {
+    this.setState({
+      onClickCheckout: true,
     });
   };
 
@@ -89,13 +98,16 @@ export class BurgerBuilder extends Component {
           </ModalBody>
 
           <ModalFooter>
-            <Button color="success" onClick={this.toggleModal}>
+            <Button color="success" onClick={this.handleCheckout}>
               Continue to Checkout
             </Button>
             <Button color="secondary" onClick={this.toggleModal}>
               Cancle
             </Button>
           </ModalFooter>
+          {this.state.onClickCheckout && (
+            <Navigate to="/checkout" replace={true} />
+          )}
         </Modal>
       </div>
     );
