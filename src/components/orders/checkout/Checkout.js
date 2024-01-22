@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
 import { Navigate } from "react-router-dom";
+import { connect } from "react-redux";
+import axios from "axios";
+
+const mapStateTopProps = (state) => {
+  return {
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice,
+    purchasable: state.purchasable,
+  };
+};
 
 class Checkout extends Component {
   state = {
@@ -28,13 +38,34 @@ class Checkout extends Component {
   };
 
   submitHandler = () => {
-    console.log(this.state.values);
-    // Perform further actions (e.g., send data to the server)
+    const order = {
+      ingredients: this.props.ingredients,
+      customer: this.state.values,
+      price: this.props.totalPrice,
+      orderTime: new Date(),
+    };
+    axios
+      .post(
+        "https://burger-builder-e45ee-default-rtdb.firebaseio.com/orders.json",
+        order
+      )
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
 
   render() {
     return (
       <div>
+        <h4
+          style={{
+            border: "1px solid grey",
+            boxShadow: "1px 1px #888888",
+            borderRadius: "5px",
+            padding: "20px",
+          }}
+        >
+          Payment: {this.props.totalPrice} BDT
+        </h4>
         <form
           style={{
             border: "1px solid grey",
@@ -85,14 +116,20 @@ class Checkout extends Component {
             Proceed To Buy
           </Button>
 
-          <Button color="secondary" className="ml-5" onClick={this.handleCancelCheckout}>
+          <Button
+            color="secondary"
+            className="ml-5"
+            onClick={this.handleCancelCheckout}
+          >
             Cancel
           </Button>
         </form>
-        {this.state.onCancelCheckout && <Navigate to="/orders" replace={true} />}
+        {this.state.onCancelCheckout && (
+          <Navigate to="/orders" replace={true} />
+        )}
       </div>
     );
   }
 }
 
-export default Checkout;
+export default connect(mapStateTopProps)(Checkout);
