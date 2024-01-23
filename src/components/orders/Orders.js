@@ -23,11 +23,14 @@ class Orders extends Component {
   componentDidMount() {
     this.props.fetchOrders();
   }
+
   componentDidUpdate() {
     console.log(this.props);
   }
+
   render() {
     let orders = null;
+
     if (this.props.orderErr) {
       orders = (
         <p
@@ -43,7 +46,7 @@ class Orders extends Component {
         </p>
       );
     } else {
-      if (this.props.orders.length === 0) {
+      if (!this.props.orders || this.props.orders.length === 0) {
         orders = (
           <p
             style={{
@@ -63,6 +66,7 @@ class Orders extends Component {
         });
       }
     }
+
     return <div>{this.props.orderLoading ? <Spinner /> : orders}</div>;
   }
 }
