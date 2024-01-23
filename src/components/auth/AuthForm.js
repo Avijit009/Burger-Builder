@@ -2,13 +2,22 @@ import React, { Component } from "react";
 import { Formik } from "formik";
 import { Button } from "reactstrap";
 import { connect } from "react-redux";
-import { auth } from "../../redux/authActionCreators";
 
-const mapDispatchToProps = dispatch => {
+import { auth } from "../../redux/authActionCreators";
+import Spinner from "../spinner/Spinner";
+
+const mapDispatchToProps = (dispatch) => {
   return {
-      auth: (email, password, mode) => dispatch(auth(email, password, mode))
-  }
-}
+    auth: (email, password, mode) => dispatch(auth(email, password, mode)),
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    authLoading: state.authLoading,
+    authFailedMsg: state.authFailedMsg,
+  };
+};
 
 export class AuthForm extends Component {
   state = {
@@ -22,8 +31,11 @@ export class AuthForm extends Component {
   };
 
   render() {
-    return (
-      <div>
+    let form = null;
+    if (this.props.authLoading) {
+      form = <Spinner />;
+    } else {
+      form = (
         <Formik
           initialValues={{
             email: "",
@@ -122,9 +134,10 @@ export class AuthForm extends Component {
             </div>
           )}
         </Formik>
-      </div>
-    );
+      );
+    }
+    return <div>{form}</div>;
   }
 }
 
-export default connect (null, mapDispatchToProps) (AuthForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);

@@ -2,44 +2,47 @@ import React from "react";
 import "./Header.css";
 import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
 import { NavLink } from "react-router-dom";
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 // import Logo from '../../assets/logo.png';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    token: state.token
-  }
-}
+    token: state.token,
+  };
+};
 
 const Header = (props) => {
   let links = null;
-  if(props.token === null){
+  if (props.token === null) {
     links = (
       <Nav className="mr-md-5">
-          <NavItem>
-            <NavLink className="NavLink" to="/signup">
+        <NavItem>
+          <NavLink className="NavLink" to="/signup">
             Sign Up / Sign In
-            </NavLink>
-          </NavItem>
-        </Nav>
-    )
-  }
-  else{
+          </NavLink>
+        </NavItem>
+      </Nav>
+    );
+  } else {
     links = (
       <Nav className="mr-md-5">
-          <NavItem>
-            <NavLink className="NavLink"  to="/">
-              Burger Builder
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink className="NavLink" to="/orders">
-              Orders
-            </NavLink>
-          </NavItem>
-
-        </Nav>
-    )
+        <NavItem>
+          <NavLink className="NavLink" to="/">
+            Burger Builder
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="NavLink" to="/orders">
+            Orders
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className="NavLink" to="/signout">
+            Sign Out
+          </NavLink>
+        </NavItem>
+      </Nav>
+    );
   }
   return (
     <div className="Navigation">
@@ -62,4 +65,4 @@ const Header = (props) => {
   );
 };
 
-export default connect(mapStateToProps) (Header);
+export default connect(mapStateToProps)(Header);
