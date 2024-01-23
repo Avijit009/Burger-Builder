@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
-import { Button } from "reactstrap";
+import { Button, Alert } from "reactstrap";
 import { connect } from "react-redux";
 
 import { auth } from "../../redux/authActionCreators";
@@ -31,6 +31,10 @@ export class AuthForm extends Component {
   };
 
   render() {
+    let err = null;
+    if (this.props.authFailedMsg !== null) {
+      err = <Alert color="danger">{this.props.authFailedMsg}</Alert>;
+    }
     let form = null;
     if (this.props.authLoading) {
       form = <Spinner />;
@@ -136,7 +140,12 @@ export class AuthForm extends Component {
         </Formik>
       );
     }
-    return <div>{form}</div>;
+    return (
+      <div>
+        {err}
+        {form}
+      </div>
+    );
   }
 }
 
