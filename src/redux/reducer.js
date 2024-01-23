@@ -47,7 +47,8 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ingredients: ingredients,
         totalPrice: state.totalPrice - INGREDIENT_PRICES[action.payload],
       };
-    case actionTypes.UPDATE_PURCHASEABLE:
+
+    case actionTypes.UPDATE_PURCHASABLE:
       const sum = state.ingredients.reduce((sum, element) => {
         return sum + element.amount;
       }, 0);
@@ -55,6 +56,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         purchasable: sum > 0,
       };
+
     case actionTypes.RESET_INGREDIENTS:
       return {
         ...state,
@@ -64,8 +66,9 @@ export const reducer = (state = INITIAL_STATE, action) => {
           { type: "meat", amount: 0 },
         ],
         totalPrice: 80,
-        purchasable: false,
+        9: false,
       };
+
     case actionTypes.LOAD_ORDERS:
       let orders = [];
       for (let key in action.payload) {

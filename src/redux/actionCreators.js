@@ -15,9 +15,9 @@ export const removeIngredient = (igtype) => {
   };
 };
 
-export const updatePurchaseAble = () => {
+export const updatePurchasable = () => {
   return {
-    type: actionTypes.UPDATE_PURCHASEABLE
+    type: actionTypes.UPDATE_PURCHASABLE
   };
 };
 

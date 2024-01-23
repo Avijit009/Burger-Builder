@@ -9,7 +9,7 @@ import Summary from "./summary/Summary";
 import {
   addIngredient,
   removeIngredient,
-  updatePurchaseAble,
+  updatePurchasable,
 } from "../../redux/actionCreators";
 
 const mapStateToProps = (state) => {
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addIngredient: (igtype) => dispatch(addIngredient(igtype)),
     removeIngredient: (igtype) => dispatch(removeIngredient(igtype)),
-    updatePurchaseAble: () => dispatch(updatePurchaseAble()),
+    updatePurchasable: () => dispatch(updatePurchasable()),
   };
 };
 
@@ -36,7 +36,7 @@ export class BurgerBuilder extends Component {
 
   addIngredientHandle = (type) => {
     this.props.addIngredient(type);
-    this.props.updatePurchaseAble();
+    this.props.updatePurchasable();
   };
 
   removeIngredientHandle = (type) => {
