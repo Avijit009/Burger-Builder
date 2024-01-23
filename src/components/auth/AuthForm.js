@@ -1,7 +1,18 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
+import { Button } from "reactstrap";
 
 export class AuthForm extends Component {
+  state = {
+    mode: "Sign Up",
+  };
+
+  switchModeHandler = () => {
+    this.setState({
+      mode: this.state.mode === "Sign Up" ? "Log In" : "Sign Up",
+    });
+  };
+
   render() {
     return (
       <div>
@@ -29,17 +40,38 @@ export class AuthForm extends Component {
               errors.password = "Must be atleast 4 characters!";
             }
 
-            if (!values.passwordConfirm) {
-              errors.passwordConfirm = "Required";
-            } else if (values.password !== values.passwordConfirm) {
-              errors.passwordConfirm = "Password field does not match!";
+            if (this.state.mode === "Sign Up") {
+              if (!values.passwordConfirm) {
+                errors.passwordConfirm = "Required";
+              } else if (values.password !== values.passwordConfirm) {
+                errors.passwordConfirm = "Password field does not match!";
+              }
             }
             // console.log("Errors:", errors)
             return errors;
           }}
         >
           {({ values, handleChange, handleSubmit, errors }) => (
-            <div>
+            <div
+              style={{
+                border: "1px grey solid",
+                padding: "15px",
+                borderRadius: "7px",
+              }}
+            >
+              <Button
+                style={{
+                  width: "100%",
+                  backgroundColor: "#D70F64",
+                  color: "white",
+                }}
+                className="btn btn-lg"
+                onClick={this.switchModeHandler}
+              >
+                Switch to {this.state.mode === "Sign Up" ? "Log In" : "Sign Up"}
+              </Button>
+              <br />
+              <hr />
               <form onSubmit={handleSubmit}>
                 <input
                   name="email"
@@ -59,17 +91,24 @@ export class AuthForm extends Component {
                 />
                 <span style={{ color: "red" }}>{errors.password}</span>
                 <br />
-                <input
-                  name="passwordConfirm"
-                  placeholder="Confirm Password"
-                  className="form-control"
-                  value={values.passwordConfirm}
-                  onChange={handleChange}
-                />
-                <span style={{ color: "red" }}>{errors.passwordConfirm}</span>
+                {this.state.mode === "Sign Up" ? (
+                  <div>
+                    <input
+                      name="passwordConfirm"
+                      placeholder="Confirm Password"
+                      className="form-control"
+                      value={values.passwordConfirm}
+                      onChange={handleChange}
+                    />
+                    <span style={{ color: "red" }}>
+                      {errors.passwordConfirm}
+                    </span>
+                  </div>
+                ) : null}
+
                 <br />
                 <button type="submit" className="btn btn-success">
-                  Sign Up
+                  {this.state.mode === "Sign Up" ? "Sign Up" : "Log In"}
                 </button>
               </form>
             </div>
