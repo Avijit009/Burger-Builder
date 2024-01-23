@@ -22,19 +22,22 @@ const Header = () => {
         </NavbarBrand>
 
         <Nav className="mr-md-5">
-
           <NavItem>
-            <NavLink className="NavLink" exact to="/">
+            <NavLink className="NavLink"  to="/">
               Burger Builder
             </NavLink>
           </NavItem>
-
           <NavItem>
             <NavLink className="NavLink" to="/orders">
               Orders
             </NavLink>
           </NavItem>
 
+          <NavItem>
+            <NavLink className="NavLink" to="/signup">
+            Sign Up
+            </NavLink>
+          </NavItem>
         </Nav>
       </Navbar>
     </div>

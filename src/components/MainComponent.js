@@ -5,6 +5,7 @@ import BurgerBuilder from "./burgerBuilder/BurgerBuilder";
 import Header from "./header/Header";
 import Orders from "./orders/Orders";
 import Checkout from "./orders/checkout/Checkout";
+import AuthForm from "./auth/AuthForm";
 
 const MainComponent = () => {
   return (
@@ -15,6 +16,7 @@ const MainComponent = () => {
           <Route path="/" exact element={<BurgerBuilder/>} />
           <Route path="/orders" element={<Orders/>} />
           <Route path="/checkout" element={<Checkout/>} />
+          <Route path="/signup" element={<AuthForm/>} />
         </Routes>
       </div>
     </div>
